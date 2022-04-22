@@ -1,0 +1,5 @@
+python == 3.10.0
+fastapi == 0.1.0
+uvicorn == 0.17.6
+motor == 2.4.0
+pipenv == 2022.4.8
