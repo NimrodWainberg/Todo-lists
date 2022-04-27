@@ -31,7 +31,7 @@ def read_route():
     return {"Ping": "Pong"}
 
 
-@app.get("/api/todo")
+@app.get("/api/todo", name="trial")
 async def get_todo():
     response = await fetch_all_todo()
     return response
