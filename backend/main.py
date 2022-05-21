@@ -14,7 +14,7 @@ app = FastAPI()
 
 
 # Allows react to connect to the backend
-origins = ['https://localhost:3000']
+origins = ['https://localhost:3000', 'http://localhost:3000']
 
 # Middleware
 app.add_middleware(
