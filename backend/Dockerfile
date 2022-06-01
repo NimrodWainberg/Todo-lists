@@ -1,7 +1,7 @@
 FROM python:3.10.0-slim-buster
 
 # RUN mkdir /backend
-WORKDIR /backend
+WORKDIR /app/backend
 
 COPY requirements.txt /backend
 
