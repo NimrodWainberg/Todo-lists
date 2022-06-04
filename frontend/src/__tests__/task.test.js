@@ -3,7 +3,6 @@ import Task from "../components/task";
 
 test("should render task component", () => {
   render(<Task />);
-  const taskElement = screen.getByTestId("task-1");
+  const taskElement = screen.getByTestId("task");
   expect(taskElement).toBeInTheDocument();
-  expect(taskElement).toHaveTextContent("Tasks List");
 });
