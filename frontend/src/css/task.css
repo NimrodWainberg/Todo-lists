@@ -1,0 +1,11 @@
+.title-text {
+    /* font-family: 'Courier New', Courier, monospace; */
+    /* font-weight: bold; */
+    font-size: 500px;
+    color: blue;
+    /* font-color: rgba(255, 255, 255, 0.1) */
+}
+
+.description-text{
+    color:black;
+}
