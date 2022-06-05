@@ -38,12 +38,15 @@ function Tasks() {
   };
 
   const checkTitleValidation = () => {
+    const titleArr = tasks.map((t) => t.title);
     return !titleValue
       ? "You can't enter an empty title"
       : numbersPattern.test(titleValue)
       ? "You can't use numbers"
       : signsPattern.test(titleValue)
       ? "You can't use special characters"
+      : titleArr.includes(titleValue)
+      ? "You already have a task with the same title"
       : "";
   };
 
