@@ -6,4 +6,4 @@
 4. Mongodb: mongodb://localhost:27017
 5. pytest unit_tests.py/ python -m pytest ./unit_tests.py
 6. npm start
-7. npm run test
+7. npm run test (press a to run all)
