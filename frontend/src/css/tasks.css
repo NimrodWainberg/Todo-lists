@@ -4,6 +4,10 @@
    
 }
 
+.title:MuiTypography-root{
+   margin-bottom: 10vh;
+}
+
 .card{
 
 }
@@ -11,4 +15,9 @@
 .align-items{
    display: flex;
    align-items: center;
+   gap: 10px;
+}
+
+.color-picker{
+   gap:0px;
 }

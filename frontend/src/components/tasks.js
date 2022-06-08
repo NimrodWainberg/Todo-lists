@@ -6,10 +6,13 @@ import Typography from "@mui/material/Typography";
 import "@fontsource/roboto/400.css";
 import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import EditTask from "./editTask";
 import List from "@mui/material/List";
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ColorPicker from "./colorPicker";
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -18,6 +21,8 @@ import "react-toastify/dist/ReactToastify.css";
 function Tasks() {
   const [name, setName] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [tasksColor, setTasksColor] = useState("blue");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [titleValue, setTitleValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
   const numbersPattern = /[0-9]/;
@@ -60,6 +65,11 @@ function Tasks() {
       : "";
   };
 
+  const handleDialogClick = () => {
+    setIsDialogOpen(!isDialogOpen);
+    console.log(isDialogOpen);
+  };
+
   const successToast = () => {
     toast("Task added", {
       className: "success-custom",
@@ -89,7 +99,7 @@ function Tasks() {
   }, []);
 
   const create = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const res = await fetch("http://127.0.0.1:8000/api/todo", {
       method: "POST",
@@ -100,9 +110,14 @@ function Tasks() {
       }),
     });
 
-    const task = await res.json();
+    let tasks = await res.json();
+    tasks = tasks.map((task, i) => {
+      task.id = i;
+      return task;
+    });
+    console.log(tasks);
 
-    setTasks([...tasks, task]);
+    setTasks([...tasks, tasks]);
   };
 
   const update = async (id, checked) => {
@@ -110,7 +125,9 @@ function Tasks() {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        complete: checked,
+        // complete: checked,
+        title: id.toString(),
+        description: tasks[id].descriptionValue.toString(),
       }),
     });
   };
@@ -202,7 +219,18 @@ function Tasks() {
                     onChange={(e) => update(task.title, e.target.checked)}
                   /> */}
                   <div className="align-items">
-                    <Task task={task} />
+                    <Task task={task} color={tasksColor} />
+                    <IconButton>
+                      <EditIcon
+                        color="secondary"
+                        // onClick={(e) => update(task.title)}
+                        onClick={handleDialogClick}
+                      />
+                      <EditTask
+                        isOpen={isDialogOpen}
+                        handleCloseDialog={handleDialogClick}
+                      />
+                    </IconButton>
                     <IconButton>
                       <DeleteIcon
                         color="error"
@@ -210,13 +238,6 @@ function Tasks() {
                       />
                     </IconButton>
                   </div>
-                  {/* <IconButton aria-label="delete" size="small">
-                    <ExpandCircleDownIcon
-                      fontSize="inherit"
-                      color="secondary"
-                      onClick={expendTask(task)}
-                    />
-                  </IconButton> */}
                 </List>
               </li>
             );
