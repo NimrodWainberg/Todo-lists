@@ -58,19 +58,18 @@ Request URL= http://localhost:8000/api/todo{title}
 </br>
 
 ## Frontend
-![image](https://user-images.githubusercontent.com/71652377/173143076-3a50882c-eb83-4582-b1b0-95c7747442cc.png)
+![image](https://user-images.githubusercontent.com/71652377/173148410-a9d7e3e5-ab40-442b-bfaf-c942fcc2e727.png)
 
 # Libraries
-</br>
 React
 </br>
 Mui
 </br>
 Toastify
 </br>
-# Testing
-</br>
-![image](https://user-images.githubusercontent.com/71652377/173143470-88cc4738-98e7-448c-b01f-c64ff26b8706.png)
+
+## Testing
+![image](https://user-images.githubusercontent.com/71652377/173148597-da21fa92-7d85-4b06-ba90-aabb78563834.png)
 
 </br>
 Jest
@@ -86,4 +85,5 @@ Testing-library
 6. pytest unit_tests.py/ python -m pytest ./unit_tests.py
 7. cd frontend
 8. npm start
-9. npm run test (press a to run all tests)
+9. Go to: Localhost:3000 
+10. npm run test (press a to run all tests)
