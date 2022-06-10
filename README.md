@@ -61,17 +61,15 @@ Request URL= http://localhost:8000/api/todo{title}
 ![image](https://user-images.githubusercontent.com/71652377/173148410-a9d7e3e5-ab40-442b-bfaf-c942fcc2e727.png)
 
 # Libraries
-</br>
 React
 </br>
 Mui
 </br>
 Toastify
 </br>
-# Testing
-</br>
-![image](https://user-images.githubusercontent.com/71652377/173148597-da21fa92-7d85-4b06-ba90-aabb78563834.png)
 
+## Testing
+![image](https://user-images.githubusercontent.com/71652377/173148597-da21fa92-7d85-4b06-ba90-aabb78563834.png)
 
 </br>
 Jest
