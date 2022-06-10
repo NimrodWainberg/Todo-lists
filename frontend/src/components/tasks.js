@@ -21,6 +21,7 @@ import ColorPicker from "./colorPicker";
 function Tasks() {
   const [name, setName] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [currentTask, setCurrentTask] = useState();
   const [tasksColor, setTasksColor] = useState("blue");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [titleValue, setTitleValue] = useState("");
@@ -70,23 +71,25 @@ function Tasks() {
       : "";
   };
 
-  const handleDialogClick = () => {
+  const handleDialogClick = (currentTask) => {
+    if (currentTask) {
+      setCurrentTask(currentTask);
+    }
     setIsDialogOpen(!isDialogOpen);
-    console.log(isDialogOpen);
   };
 
   const successToast = () => {
-    toast("Task added", {
+    toast(`New Task: ${titleValue} was created successfully`, {
       className: "success-custom",
       draggable: true,
       position: toast.POSITION.TOP_CENTER,
+      autoClose: 5000,
     });
   };
 
   useEffect(() => {
     (async () => {
       try {
-        // const res = await fetch("http://localhost:8000/tasks");
         const res = await fetch("http://127.0.0.1:8000/api/todo");
         const content = await res.json();
 
@@ -104,47 +107,59 @@ function Tasks() {
   }, []);
 
   const create = async (e) => {
-    // e.preventDefault();
-
-    const res = await fetch("http://127.0.0.1:8000/api/todo", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: titleValue.toString(),
-        description: descriptionValue.toString(),
-      }),
-    });
-
-    let tasks = await res.json();
-    tasks = tasks.map((task, i) => {
-      task.id = i;
-      return task;
-    });
-    console.log(tasks);
-
-    setTasks([...tasks, tasks]);
-  };
-
-  const update = async (id, newDescription) => {
-    // debugger;
-    const checkValidation = checkDescriptionValidation(newDescription);
-    if (checkValidation) {
-      toast.error(`ERROR, ${checkValidation}`);
-    }
+    e.preventDefault();
     try {
-      // await fetch(`http://127.0.0.1:8000/api/todo${id}`, {
-      await fetch(
-        `http://127.0.0.1:8000/api/todo${id}?description=${newDescription}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const res = await fetch("http://127.0.0.1:8000/api/todo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: titleValue.toString(),
+          description: descriptionValue.toString(),
+        }),
+      });
+
+      const updatedTasks = await res.json();
+      // updatedTasks = updatedTasks.map((task, i) => {
+      //   task.id = i;
+      //   return task;
+      // });
+      // console.log(tasks);
+
+      setTasks([...tasks, updatedTasks]);
+      setTitleValue("");
+      setDescriptionValue("");
     } catch (err) {
       toast.error(`ERROR, ${err}`);
     }
-    // setTasks([...tasks, { id: newDescription }]);
-    // setTasks([...tasks, updatedTask]);
+  };
+
+  const update = async (id, newDescription) => {
+    const checkValidation = checkDescriptionValidation(newDescription);
+    if (checkValidation) {
+      toast.warn(`ERROR, ${checkValidation}`);
+    } else {
+      try {
+        await fetch(
+          `http://127.0.0.1:8000/api/todo${id}?description=${newDescription}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        // setTasks([...tasks, { title: id, description: newDescription }]);
+        setTasks(
+          tasks.map((t) => {
+            if (t.title === id) {
+              t.description = newDescription;
+            }
+            return t;
+          })
+        );
+        toast.success(`Task: ${id} was updated successfully`);
+      } catch (err) {
+        toast.error(`ERROR, ${err}`);
+      }
+    }
   };
 
   const del = async (id) => {
@@ -154,6 +169,7 @@ function Tasks() {
           method: "DELETE",
         });
         setTasks(tasks.filter((t) => t.title !== id));
+        toast.success(`Task: ${id} was deleted successfully`);
       } catch (err) {
         toast.error(`ERROR, ${err}`);
       }
@@ -162,7 +178,7 @@ function Tasks() {
 
   return (
     <div data-testid="tasks" className="todo-container">
-      <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
+      <ToastContainer draggable={false} transition={Zoom} autoClose={4000} />
       <div className="card">
         <Typography
           variant="h2"
@@ -210,43 +226,32 @@ function Tasks() {
             onClick={successToast}>
             Add
           </Button>
-          <div className="align-items color-picker">
+          {/* <div className="align-items color-picker">
             <ColorPicker color={"#000000"} />
             <ColorPicker color={"#0000FF"} />
             <ColorPicker color={"#c95400"} />
             <ColorPicker color={"#d60000"} />
-          </div>
+          </div> */}
         </form>
 
-        <ul className="">
+        <ul className="margin-top">
           {tasks.map((task) => {
             console.log(task);
             return (
               <li className="">
                 <List className="">
-                  {/* <input
-                    className=""
-                    type="checkbox"
-                    value=""
-                    aria-label="..."
-                    defaultChecked={task.complete}
-                    // onChange={(e) => update(task.id, e.target.checked)}
-                    onChange={(e) => update(task.title, e.target.checked)}
-                  /> */}
                   <div className="align-items">
                     <Task task={task} color={tasksColor} />
                     <IconButton>
                       <EditIcon
                         color="secondary"
-                        // onClick={(e) => update(task.title)}
-                        onClick={handleDialogClick}
+                        onClick={() => handleDialogClick(task)}
                       />
                       <EditTask
                         isOpen={isDialogOpen}
                         handleCloseDialog={handleDialogClick}
                         handleUpdateDialog={(newDescription) => {
-                          console.log(task.title);
-                          update(task.title, newDescription);
+                          update(currentTask.title, newDescription);
                         }}
                       />
                     </IconButton>
