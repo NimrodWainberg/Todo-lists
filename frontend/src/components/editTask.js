@@ -15,11 +15,13 @@ const EditTask = ({ isOpen, handleCloseDialog, handleUpdateDialog }) => {
   };
 
   const handleClose = () => {
+    setNewDescriptionValue("");
     handleCloseDialog();
   };
 
   const handleUpdate = () => {
     handleUpdateDialog(newDescriptionValue);
+    setNewDescriptionValue("");
     handleCloseDialog();
   };
 
