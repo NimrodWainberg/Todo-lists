@@ -195,7 +195,7 @@ function Tasks() {
               // className={checkTitleValidation() ? true : false}
               id="outlined-error-helper-text"
               label="Title"
-              placeholder="Add new task"
+              placeholder="Add new task title"
               helperText={checkTitleValidation()}
               onChange={handleTitleChange}
               value={titleValue}
@@ -205,7 +205,7 @@ function Tasks() {
               // className={checkTitleValidation() ? true : false}
               id="outlined-error-helper-text"
               label="Description"
-              placeholder="Add new task"
+              placeholder="Add new task description"
               helperText={checkDescriptionValidation()}
               onChange={handleDescriptionChange}
               value={descriptionValue}
