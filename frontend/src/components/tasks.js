@@ -51,6 +51,8 @@ function Tasks() {
       ? "You can't use numbers"
       : signsPattern.test(titleValue)
       ? "You can't use special characters"
+      : titleValue.length > 12
+      ? "The title is too long"
       : titleArr.includes(titleValue)
       ? "You already have a task with the same title"
       : "";
@@ -242,25 +244,27 @@ function Tasks() {
                 <List className="">
                   <div className="align-items">
                     <Task task={task} color={tasksColor} />
-                    <IconButton>
-                      <EditIcon
-                        color="secondary"
-                        onClick={() => handleDialogClick(task)}
-                      />
-                      <EditTask
-                        isOpen={isDialogOpen}
-                        handleCloseDialog={handleDialogClick}
-                        handleUpdateDialog={(newDescription) => {
-                          update(currentTask.title, newDescription);
-                        }}
-                      />
-                    </IconButton>
-                    <IconButton>
-                      <DeleteIcon
-                        color="error"
-                        onClick={(e) => del(task.title)}
-                      />
-                    </IconButton>
+                    <div className="margin-left">
+                      <IconButton>
+                        <EditIcon
+                          color="secondary"
+                          onClick={() => handleDialogClick(task)}
+                        />
+                        <EditTask
+                          isOpen={isDialogOpen}
+                          handleCloseDialog={handleDialogClick}
+                          handleUpdateDialog={(newDescription) => {
+                            update(currentTask.title, newDescription);
+                          }}
+                        />
+                      </IconButton>
+                      <IconButton>
+                        <DeleteIcon
+                          color="error"
+                          onClick={(e) => del(task.title)}
+                        />
+                      </IconButton>
+                    </div>
                   </div>
                 </List>
               </li>

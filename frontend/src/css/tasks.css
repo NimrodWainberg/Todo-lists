@@ -19,7 +19,14 @@
 .align-items{
    display: flex;
    align-items: center;
-   gap: 10px;
+   /* gap: 10px; */
+}
+
+.margin-left{
+   display: flex;
+   position: absolute;
+   justify-content: center;
+   margin-left: 220px;
 }
 
 .color-picker{
