@@ -7,14 +7,24 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const EditTask = ({ isOpen, handleCloseDialog }) => {
+const EditTask = ({ isOpen, handleCloseDialog, handleUpdateDialog }) => {
+  const [newDescriptionValue, setNewDescriptionValue] = useState("");
+
+  const handleDescriptionChange = (event) => {
+    setNewDescriptionValue(event.target.value);
+  };
+
   const handleClose = () => {
     handleCloseDialog();
   };
-  // debugger;
-  console.log(isOpen);
+
+  const handleUpdate = () => {
+    handleUpdateDialog(newDescriptionValue);
+    handleCloseDialog();
+  };
+
   return (
-    <Dialog open={isOpen} onClose={handleClose}>
+    <Dialog data-testid="editTask" open={isOpen} onClose={handleClose}>
       <DialogTitle>Update Task</DialogTitle>
       <DialogContent>
         {/* <DialogContentText>To subscribe</DialogContentText> */}
@@ -25,12 +35,14 @@ const EditTask = ({ isOpen, handleCloseDialog }) => {
           label="New Description"
           type="text"
           fullWidth
+          onChange={handleDescriptionChange}
+          value={newDescriptionValue}
           variant="standard"
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Update</Button>
+        <Button onClick={handleUpdate}>Update</Button>
       </DialogActions>
     </Dialog>
   );

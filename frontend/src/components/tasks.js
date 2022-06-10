@@ -55,12 +55,17 @@ function Tasks() {
       : "";
   };
 
-  const checkDescriptionValidation = () => {
-    return !descriptionValue
+  const checkDescriptionValidation = (descriptionNewValue) => {
+    let checkDescValue;
+    typeof descriptionNewValue !== "undefined"
+      ? (checkDescValue = descriptionNewValue)
+      : (checkDescValue = descriptionValue);
+
+    return !checkDescValue
       ? "You can't enter an empty description"
-      : numbersPattern.test(descriptionValue)
+      : numbersPattern.test(checkDescValue)
       ? "You can't use numbers"
-      : signsPattern.test(descriptionValue)
+      : signsPattern.test(checkDescValue)
       ? "You can't use special characters"
       : "";
   };
@@ -120,16 +125,26 @@ function Tasks() {
     setTasks([...tasks, tasks]);
   };
 
-  const update = async (id, checked) => {
-    await fetch(`http://127.0.0.1:8000/api/todo${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        // complete: checked,
-        title: id.toString(),
-        description: tasks[id].descriptionValue.toString(),
-      }),
-    });
+  const update = async (id, newDescription) => {
+    // debugger;
+    const checkValidation = checkDescriptionValidation(newDescription);
+    if (checkValidation) {
+      toast.error(`ERROR, ${checkValidation}`);
+    }
+    try {
+      // await fetch(`http://127.0.0.1:8000/api/todo${id}`, {
+      await fetch(
+        `http://127.0.0.1:8000/api/todo${id}?description=${newDescription}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    } catch (err) {
+      toast.error(`ERROR, ${err}`);
+    }
+    // setTasks([...tasks, { id: newDescription }]);
+    // setTasks([...tasks, updatedTask]);
   };
 
   const del = async (id) => {
@@ -138,15 +153,16 @@ function Tasks() {
         await fetch(`http://127.0.0.1:8000/api/todo${id}`, {
           method: "DELETE",
         });
-      } catch (err) {}
-
-      setTasks(tasks.filter((t) => t.title !== id));
+        setTasks(tasks.filter((t) => t.title !== id));
+      } catch (err) {
+        toast.error(`ERROR, ${err}`);
+      }
     }
   };
 
   return (
     <div data-testid="tasks" className="todo-container">
-      <ToastContainer draggable={false} transition={Zoom} autoClose={8000} />
+      <ToastContainer draggable={false} transition={Zoom} autoClose={2000} />
       <div className="card">
         <Typography
           variant="h2"
@@ -158,13 +174,6 @@ function Tasks() {
         </Typography>
         <form className="" onSubmit={create}>
           <div className="">
-            {/* <input
-              type="text"
-              id="form3"
-              className="form-control form-control-lg"
-              onChange={(e) => setName(e.target.value)}
-            /> */}
-
             <TextField
               error={checkTitleValidation() ? true : false}
               // className={checkTitleValidation() ? true : false}
@@ -201,6 +210,12 @@ function Tasks() {
             onClick={successToast}>
             Add
           </Button>
+          <div className="align-items color-picker">
+            <ColorPicker color={"#000000"} />
+            <ColorPicker color={"#0000FF"} />
+            <ColorPicker color={"#c95400"} />
+            <ColorPicker color={"#d60000"} />
+          </div>
         </form>
 
         <ul className="">
@@ -229,6 +244,10 @@ function Tasks() {
                       <EditTask
                         isOpen={isDialogOpen}
                         handleCloseDialog={handleDialogClick}
+                        handleUpdateDialog={(newDescription) => {
+                          console.log(task.title);
+                          update(task.title, newDescription);
+                        }}
                       />
                     </IconButton>
                     <IconButton>
