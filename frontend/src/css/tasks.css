@@ -12,6 +12,10 @@
 
 }
 
+.margin-top{
+   margin-top: 50px;
+}
+
 .align-items{
    display: flex;
    align-items: center;
