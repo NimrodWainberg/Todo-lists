@@ -86,4 +86,5 @@ Testing-library
 6. pytest unit_tests.py/ python -m pytest ./unit_tests.py
 7. cd frontend
 8. npm start
-9. npm run test (press a to run all tests)
+9. Go to: Localhost:3000 
+10. npm run test (press a to run all tests)
