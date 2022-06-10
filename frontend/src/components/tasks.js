@@ -70,6 +70,8 @@ function Tasks() {
       ? "You can't use numbers"
       : signsPattern.test(checkDescValue)
       ? "You can't use special characters"
+      : checkDescValue.length > 12
+      ? "The title is too long"
       : "";
   };
 
