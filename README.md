@@ -58,7 +58,8 @@ Request URL= http://localhost:8000/api/todo{title}
 </br>
 
 ## Frontend
-![image]image.png
+![image](https://user-images.githubusercontent.com/71652377/173143076-3a50882c-eb83-4582-b1b0-95c7747442cc.png)
+
 # Libraries
 </br>
 React
@@ -69,15 +70,20 @@ Toastify
 </br>
 # Testing
 </br>
+![image](https://user-images.githubusercontent.com/71652377/173143470-88cc4738-98e7-448c-b01f-c64ff26b8706.png)
+
+</br>
 Jest
 </br>
 Testing-library
 
 ## Run:
 1. install: pipenv install -r requirements.txt
-2. uvicorn main:app --reload
-3. Go to: 127.0.0.1:8000 or 127.0.0.1:8000/docs
-4. Mongodb: mongodb://localhost:27017
-5. pytest unit_tests.py/ python -m pytest ./unit_tests.py
-6. npm start
-7. npm run test (press a to run all tests)
+2. cd backend 
+3. uvicorn main:app --reload
+4. Go to: 127.0.0.1:8000 or 127.0.0.1:8000/docs
+5. Mongodb: mongodb://localhost:27017
+6. pytest unit_tests.py/ python -m pytest ./unit_tests.py
+7. cd frontend
+8. npm start
+9. npm run test (press a to run all tests)
