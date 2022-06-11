@@ -71,7 +71,7 @@ function Tasks() {
       : signsPattern.test(checkDescValue)
       ? "You can't use special characters"
       : checkDescValue.length > 12
-      ? "The title is too long"
+      ? "The description is too long"
       : "";
   };
 
