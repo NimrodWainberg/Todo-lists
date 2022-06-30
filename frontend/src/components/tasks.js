@@ -12,7 +12,7 @@ import EditTask from "./editTask";
 import List from "@mui/material/List";
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ColorPicker from "./colorPicker";
+// import ColorPicker from "./colorPicker";
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

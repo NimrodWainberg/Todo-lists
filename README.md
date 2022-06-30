@@ -93,4 +93,5 @@ Testing-library
 2. docker build -t todo-backend .
 3. cd frontend
 4. docker build -t todo-frontend .
-5. docker-compose up -d (-d is optional)
+5. Preferred way: docker compose build (will do 1-4 automatically)
+6. docker-compose up -d (-d is optional)
