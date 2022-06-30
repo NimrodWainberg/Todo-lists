@@ -4,11 +4,6 @@ services:
     # image: todo-frontend
     ports:
       - "3000:3000"
-    # networks:
-    #   - front-tier
-    #   - back-tier
-    # configs:
-    #   - httpd-config
 
   backend:
     build: backend/
@@ -19,10 +14,7 @@ services:
       - mongo
     links:
      - mongo:db
-    # volumes:
-    #   - db-data:/etc/data
-    # networks:
-    #   - back-tier
+
 
   mongo:
     image: mongo
@@ -32,14 +24,3 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - "27017:27017"
-
-  # mongo-express:
-  #   image: mongo-express
-  #   restart: always
-  #   ports:
-  #     - 8081:8081
-  #   environment:
-  #     # ME_CONFIG_MONGODB_ADMINUSERNAME: root
-  #     # ME_CONFIG_MONGODB_ADMINPASSWORD: example
-  #     # ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
-  #     ME_CONFIG_MONGODB_URL: mongodb://localhost:27017
