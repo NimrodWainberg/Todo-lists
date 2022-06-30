@@ -87,3 +87,11 @@ Testing-library
 8. npm start
 9. Go to: Localhost:3000 
 10. npm run test (press a to run all tests)
+
+## Docker
+1. cd backend
+2. docker build -t todo-backend .
+3. cd frontend
+4. docker build -t todo-frontend .
+5. Preferred way: docker compose build (will do 1-4 automatically)
+6. docker-compose up -d (-d is optional)
