@@ -1,5 +1,9 @@
 # Todo-lists
 
+
+https://user-images.githubusercontent.com/71652377/177017552-f2110324-9b75-4657-a9a7-c49323abd1d3.mp4
+
+
 ## Goal:
 
 Todo-list application is ment to manage your tasks on daily basis
