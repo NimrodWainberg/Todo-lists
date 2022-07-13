@@ -6,9 +6,9 @@ https://user-images.githubusercontent.com/71652377/177017552-f2110324-9b75-4657-
 
 ## Goal:
 
-Todo-list application is ment to manage your tasks on daily basis
+**Todo-list** application is ment to manage your tasks on daily basis
 
-In this project I have used Fastapi(python) with Mongodb and React, Restful Api(Get, Post, Put, Delete)
+<p> In this project I have used Fastapi(python) with Mongodb and React, Restful Api(Get, Post, Put, Delete) </p>
 
 ## Backend
 
@@ -18,17 +18,17 @@ In this project I have used Fastapi(python) with Mongodb and React, Restful Api(
 
 # Mongodb
 
-DB_NAME=`TodoList`
+**DB_NAME**=`TodoList`
 </br>
-DB_HOST=`localhost`
+**DB_HOST**=`localhost`
 </br>
-DB_PORT=`27017`
+**DB_PORT**=`27017`
 
 ## Model
 
-Title: string
+**Title**: string
 </br>
-Descripition: string
+**Descripition**: string
 
 ## Restful Api
 
@@ -42,60 +42,71 @@ Request URL= http://localhost:8000/api/todo
 
 # Get todo by id
 
+
 </br>
 Request URL= http://localhost:8000/api/todo{title}
 </br>
 
 # Add todo
+
 </br>
 Request URL= http://localhost:8000/api/todo
 </br>
 
 # Update todo
+
 </br>
 Request URL= http://localhost:8000/api/todo{title}?description={description}
 </br>
 
 # Delete todo
+
 </br>
 Request URL= http://localhost:8000/api/todo{title}
 </br>
 
 ## Frontend
+
 ![image](https://user-images.githubusercontent.com/71652377/173148410-a9d7e3e5-ab40-442b-bfaf-c942fcc2e727.png)
 
 # Libraries
-React
-</br>
-Mui
-</br>
-Toastify
+
+<li> React </li>
+<li> Mui </li>
+<li> Toastify </li>
 </br>
 
 ## Testing
+
 ![image](https://user-images.githubusercontent.com/71652377/173148597-da21fa92-7d85-4b06-ba90-aabb78563834.png)
 
+<li> Jest </li>
+<li> Testing-library </li>
+
 </br>
-Jest
-</br>
-Testing-library
 
 ## Run:
-1. install: pipenv install -r requirements.txt
-2. cd backend 
-3. uvicorn main:app --reload
-4. Go to: 127.0.0.1:8000 or 127.0.0.1:8000/docs
-5. Mongodb: mongodb://localhost:27017
-6. pytest unit_tests.py/ python -m pytest ./unit_tests.py
-7. cd frontend
-8. npm start
-9. Go to: Localhost:3000 
-10. npm run test (press a to run all tests)
 
-## Docker
-1. cd backend
-2. docker build -t todo-backend .
-3. cd frontend
-4. docker build -t todo-frontend .
-5. Preferred way: docker compose build (will do 1-4 automatically)
-6. docker-compose up -d (-d is optional)
+<ol>
+<li> install: pipenv install -r requirements.txt </li>
+<li> cd backend </li>
+<li> uvicorn main:app --reload </li>
+<li> Go to: 127.0.0.1:8000 or 127.0.0.1:8000/docs </li>
+<li> Mongodb: mongodb://localhost:27017 </li>
+<li> pytest unit_tests.py/ python -m pytest ./unit_tests.py </li>
+<li> cd frontend </li>
+<li> npm start </li>
+<li> Go to: Localhost:3000 </li>
+<li> npm run test (press a to run all tests)  </li>
+</ol>
+
+## Docker:
+
+<ol>
+<li> cd backend </li>
+<li> docker build -t todo-backend . </li>
+<li> cd frontend </li>
+<li> docker build -t todo-frontend . </li>
+<li> Preferred way: docker compose build (will do 1-4 automatically) </li>
+<li> docker-compose up -d (-d is optional) </li>
+</ol>
